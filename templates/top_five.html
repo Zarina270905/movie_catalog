@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}MovieCatalog - Топ 5 фильмов{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="header-section">
+        <h1>Мои топ-5 фильмов</h1>
+        <p class="subtitle">Лучшие фильмы из моей коллекции</p>
+
+        <!-- Статус топа -->
+        <div class="top-status">
+            <p>Всего фильмов в топе: {{ top_movies|length }}/5</p>
+        </div>
+    </div>
+
+    <div class="top-movies-list">
+        {% for movie in top_movies %}
+        <div class="top-movie-item">
+            <div class="top-number">{{ forloop.counter }}</div>
+            <div class="top-movie-poster">
+                {% if movie.poster %}
+                    <img src="{{ movie.poster.url }}" alt="{{ movie.title }}">
+                {% else %}
+                    <div class="no-poster">
+                        <i class="fas fa-film"></i>
+                    </div>
+                {% endif %}
+            </div>
+            <div class="top-movie-info">
+                <h3 class="top-movie-title">
+                    <a href="{% url 'movie_detail' movie.id %}">{{ movie.title }}</a>
+                </h3>
+                <p class="top-movie-year">{{ movie.year }}</p>
+                <p class="top-movie-director">
+                    Режиссер:
+                    <a href="{% url 'director_detail' movie.director.id %}">
+                        {{ movie.director.name }}
+                    </a>
+                </p>
+                <p class="top-movie-description">{{ movie.description|truncatewords:30 }}</p>
+                <a href="{% url 'movie_detail' movie.id %}" class="detail-link">
+                    Подробнее <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+        {% empty %}
+        <div class="no-top-movies">
+            <i class="fas fa-star fa-3x"></i>
+            <h3>Топ фильмы не найдены</h3>
+            <p>Добавьте фильмы в топ с главной страницы</p>
+            <a href="{% url 'index' %}" class="btn-primary">Перейти к коллекции</a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

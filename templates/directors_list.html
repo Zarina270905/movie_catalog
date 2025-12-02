@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}MovieCatalog - Режиссеры{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="header-section">
+        <h1>Режиссеры</h1>
+        <p class="subtitle">Все режиссеры в нашей коллекции</p>
+    </div>
+
+    <div class="directors-grid">
+        {% for director in directors %}
+        <div class="director-card">
+            <a href="{% url 'director_detail' director.id %}" class="director-link">
+                <div class="director-photo">
+                    {% if director.photo %}
+                        <img src="{{ director.photo.url }}" alt="{{ director.name }}">
+                    {% else %}
+                        <div class="no-photo">
+                            <i class="fas fa-user-tie"></i>
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="director-info">
+                    <h3 class="director-name">{{ director.name }}</h3>
+                    <p class="director-movies-count">
+                        Фильмов в коллекции: {{ director.movie_set.count }}
+                    </p>
+                </div>
+            </a>
+        </div>
+        {% empty %}
+        <div class="no-directors">
+            <i class="fas fa-user-tie fa-3x"></i>
+            <h3>Режиссеры не найдены</h3>
+            <p>Добавьте режиссеров через админ-панель</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

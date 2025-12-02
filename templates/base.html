@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}MovieCatalog - Your Film Collection{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <!-- Логотип -->
+            <div class="nav-logo">
+                <a href="{% url 'index' %}">MovieCatalog</a>
+            </div>
+
+            <!-- Основное меню -->
+            <div class="nav-menu">
+                <a href="{% url 'index' %}" class="nav-link"><i class="fas fa-home"></i> Главная</a>
+                <a href="{% url 'top_five' %}" class="nav-link"><i class="fas fa-star"></i> Топ фильмы</a>
+                <a href="{% url 'directors_list' %}" class="nav-link"><i class="fas fa-video"></i> Режиссеры</a>
+                <a href="{% url 'actors_list' %}" class="nav-link"><i class="fas fa-user-tie"></i> Актеры</a>
+
+                <!-- Меню добавления (для is_staff) -->
+                {% if user.is_authenticated and user.is_staff %}
+                <div class="dropdown">
+                    <button class="nav-link dropdown-toggle add-btn">
+                        <i class="fas fa-plus-circle"></i> Добавить
+                    </button>
+                    <div class="dropdown-content">
+                        <a href="{% url 'add_movie' %}"><i class="fas fa-film"></i> Фильм</a>
+                        <a href="{% url 'add_director' %}"><i class="fas fa-video"></i> Режиссера</a>
+                        <a href="{% url 'add_actor' %}"><i class="fas fa-user-tie"></i> Актера</a>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+
+            <!-- Поиск -->
+            <div class="nav-search">
+                <form method="get" action="{% url 'index' %}" class="search-form">
+                    <input type="text" name="q" placeholder="Поиск фильмов, актеров..."
+                           value="{{ request.GET.q|default:'' }}">
+                    <button type="submit"><i class="fas fa-search"></i></button>
+                </form>
+            </div>
+
+            <!-- Аутентификация -->
+            <div class="nav-auth">
+                {% if user.is_authenticated %}
+                    <div class="user-info-display">
+                        <i class="fas fa-user"></i>
+                        <span class="user-name">{{ user.username }}</span>
+                    </div>
+                    <div class="dropdown">
+                        <button class="nav-link settings-btn">
+                            <i class="fas fa-cog"></i>
+                        </button>
+                        <div class="dropdown-content">
+                            <a href="{% url 'profile' %}">
+                                <i class="fas fa-user-circle"></i> Профиль
+                            </a>
+                            {% if user.is_staff %}
+                                <div class="user-role">
+                                    {% if user.is_superuser %}
+                                    <i class="fas fa-shield-alt"></i> Администратор
+                                    {% else %}
+                                    <i class="fas fa-crown"></i> Менеджер
+                                    {% endif %}
+                                </div>
+                            {% endif %}
+                            <hr>
+                            <a href="{% url 'logout' %}" class="logout-link">
+                                <i class="fas fa-sign-out-alt"></i> Выйти
+                            </a>
+                        </div>
+                    </div>
+                {% else %}
+                    <a href="{% url 'login' %}" class="nav-link"><i class="fas fa-sign-in-alt"></i> Войти</a>
+                    <a href="{% url 'register' %}" class="nav-link btn-register"><i class="fas fa-user-plus"></i> Регистрация</a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <!-- Сообщения -->
+        {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+            <div class="message {{ message.tags }}">
+                {{ message }}
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <!-- Основное содержимое -->
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2025 MovieCatalog. Your Personal Film Collection.</p>
+            <div class="footer-links">
+                {% if not user.is_authenticated %}
+                    <a href="{% url 'login' %}">Вход</a> |
+                    <a href="{% url 'register' %}">Регистрация</a>
+                {% endif %}
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Открытие/закрытие dropdown меню добавления
+            const addDropdown = document.querySelector('.add-btn');
+            const addMenu = document.querySelector('.add-btn')?.closest('.dropdown')?.querySelector('.dropdown-content');
+
+            if (addDropdown && addMenu) {
+                addDropdown.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    addMenu.classList.toggle('show');
+                });
+            }
+
+            // Открытие/закрытие dropdown меню настроек
+            const settingsBtn = document.querySelector('.settings-btn');
+            const settingsMenu = document.querySelector('.settings-btn')?.closest('.dropdown')?.querySelector('.dropdown-content');
+
+            if (settingsBtn && settingsMenu) {
+                settingsBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    settingsMenu.classList.toggle('show');
+                });
+            }
+
+            // Закрытие dropdown при клике вне
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('.dropdown')) {
+                    document.querySelectorAll('.dropdown-content').forEach(menu => {
+                        menu.classList.remove('show');
+                    });
+                }
+            });
+
+            // Подтверждение выхода
+            document.querySelectorAll('.logout-link').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    if (!confirm('Вы уверены, что хотите выйти?')) {
+                        e.preventDefault();
+                    }
+                });
+            });
+
+            // Автоскрытие сообщений через 5 секунд
+            setTimeout(() => {
+                document.querySelectorAll('.message').forEach(msg => {
+                    msg.style.transition = 'opacity 0.5s ease';
+                    msg.style.opacity = '0';
+                    setTimeout(() => msg.remove(), 500);
+                });
+            }, 5000);
+
+            // Закрытие dropdown при нажатии Escape
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    document.querySelectorAll('.dropdown-content').forEach(menu => {
+                        menu.classList.remove('show');
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

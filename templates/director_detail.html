@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}MovieCatalog - {{ director.name }}{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="person-header">
+        <a href="{% url 'directors_list' %}" class="back-link">
+            <i class="fas fa-arrow-left"></i> Назад к режиссерам
+        </a>
+        
+        <div class="person-info">
+            <div class="person-photo">
+                {% if director.photo %}
+                    <img src="{{ director.photo.url }}" alt="{{ director.name }}">
+                {% else %}
+                    <div class="no-photo-large">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                {% endif %}
+            </div>
+            <div class="person-details">
+                <h1 class="person-name">{{ director.name }}</h1>
+                <p class="person-movies-count">Фильмов в коллекции: {{ movies|length }}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="filmography-section">
+        <h2 class="section-title">Фильмография</h2>
+        
+        {% if movies %}
+        <div class="movies-grid">
+            {% for movie in movies %}
+            <div class="movie-card">
+                <a href="{% url 'movie_detail' movie.id %}" class="movie-link">
+                    <div class="movie-poster">
+                        {% if movie.poster %}
+                            <img src="{{ movie.poster.url }}" alt="{{ movie.title }}">
+                        {% else %}
+                            <div class="no-poster">
+                                <i class="fas fa-film"></i>
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="movie-info">
+                        <h3 class="movie-title">{{ movie.title }}</h3>
+                        <p class="movie-year">{{ movie.year }}</p>
+                        <div class="movie-actors">
+                            <strong>Актеры:</strong>
+                            {% for actor in movie.actors.all|slice:":3" %}
+                                <a href="{% url 'actor_detail' actor.id %}" class="actor-name">
+                                    {{ actor.name }}
+                                </a>{% if not forloop.last %}, {% endif %}
+                            {% endfor %}
+                            {% if movie.actors.count > 3 %}...{% endif %}
+                        </div>
+                        {% if movie.is_top %}
+                            <span class="top-badge">Топ</span>
+                        {% endif %}
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="no-movies">
+            <i class="fas fa-film fa-3x"></i>
+            <h3>Фильмы не найдены</h3>
+            <p>У этого режиссера пока нет фильмов в коллекции</p>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

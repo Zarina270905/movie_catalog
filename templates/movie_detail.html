@@ -1,0 +1,277 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}MovieCatalog - {{ movie.title }}{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="movie-detail">
+        <div class="detail-header">
+            <a href="{% url 'index' %}" class="back-link">
+                <i class="fas fa-arrow-left"></i> Назад к коллекции
+            </a>
+        </div>
+
+        <!-- Сообщения -->
+        {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+            <div class="message {{ message.tags }}">
+                {{ message }}
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <div class="detail-content">
+            <div class="detail-poster">
+                {% if movie.poster %}
+                    <img src="{{ movie.poster.url }}" alt="{{ movie.title }}">
+                {% else %}
+                    <div class="no-poster-large">
+                        <i class="fas fa-film"></i>
+                    </div>
+                {% endif %}
+
+                <!-- Кнопки управления топом на странице фильма -->
+                <div class="detail-actions">
+                    {% if movie.is_top %}
+                        <form method="post" class="top-form">
+                            {% csrf_token %}
+                            <input type="hidden" name="action" value="remove_from_top">
+                            <button type="submit" class="btn-remove-top large">
+                                <i class="fas fa-star"></i> Убрать из топа
+                            </button>
+                        </form>
+                    {% else %}
+                        <form method="post" class="top-form">
+                            {% csrf_token %}
+                            <input type="hidden" name="action" value="add_to_top">
+                            <button type="submit" class="btn-add-top large">
+                                <i class="far fa-star"></i> Добавить в топ
+                            </button>
+                        </form>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="detail-info">
+                <h1 class="detail-title">{{ movie.title }} ({{ movie.year }})</h1>
+
+                <!-- Контейнер для топа и рейтинга -->
+                <div class="movie-header-info">
+                    {% if movie.is_top %}
+                        <span class="top-badge-large">Топ фильм</span>
+                    {% endif %}
+
+                    <!-- Рейтинг фильма - всегда под названием/топом -->
+                    <div class="rating-compact">
+                        <div class="rating-header">
+                            <i class="fas fa-star"></i>
+                            <span>Рейтинг фильма</span>
+                        </div>
+                        <div class="rating-main">
+                            <span class="rating-big">{{ movie.average_rating|floatformat:1 }}</span>
+                            <span class="rating-small">/10</span>
+                        </div>
+                        <div class="rating-stats">
+                            <span><i class="fas fa-comment"></i> {{ reviews.count }} отзывов</span>
+                            <span><i class="fas fa-chart-line"></i> {{ movie.reviews.count }} оценок</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="detail-section">
+                    <h3><i class="fas fa-user-tie"></i> Режиссер</h3>
+                    <p>
+                        <a href="{% url 'director_detail' movie.director.id %}" class="person-link">
+                            {{ movie.director.name }}
+                        </a>
+                    </p>
+                </div>
+
+                <div class="detail-section">
+                    <h3><i class="fas fa-users"></i> Актеры</h3>
+                    <div class="actors-list">
+                        {% for actor in movie.actors.all %}
+                            <a href="{% url 'actor_detail' actor.id %}" class="actor-tag">
+                                {{ actor.name }}
+                            </a>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="detail-section">
+                    <h3><i class="fas fa-align-left"></i> Описание</h3>
+                    <p class="description">{{ movie.description }}</p>
+                </div>
+
+                <!-- Форма отзыва - ПРОСТЫЕ СТИЛИ -->
+                <div class="review-form-simple">
+                    <h3><i class="fas fa-edit"></i> Оставить отзыв</h3>
+
+                    <form method="post" id="reviewForm">
+                        {% csrf_token %}
+                        <input type="hidden" name="review_submit" value="true">
+
+                        <!-- Ваше имя -->
+                        <div class="form-group-simple">
+                            <label for="author_name">Ваше имя</label>
+                            <input type="text"
+                                   name="author_name"
+                                   id="author_name"
+                                   class="form-input-simple"
+                                   placeholder="Ваше имя"
+                                   required
+                                   value="{{ form.author_name.value|default:'' }}">
+                        </div>
+
+                        <!-- Ваша оценка (1-10) -->
+                        <div class="form-group-simple">
+                            <label>Ваша оценка (1-10)</label>
+                            <div class="rating-buttons" id="ratingButtons">
+                                {% for i in "123456789"|make_list %}
+                                    <div class="rating-btn" data-value="{{ i }}">{{ i }}</div>
+                                {% endfor %}
+                                <div class="rating-btn" data-value="10">10</div>
+                            </div>
+                            <input type="hidden" name="rating" id="ratingValue" value="8" required>
+                        </div>
+
+                        <!-- Текст отзыва -->
+                        <div class="form-group-simple">
+                            <label for="review_text">Текст отзыва</label>
+                            <textarea name="text"
+                                      id="review_text"
+                                      class="form-input-simple"
+                                      rows="4"
+                                      placeholder="Ваш отзыв..."
+                                      required>{{ form.text.value|default:'' }}</textarea>
+                        </div>
+
+                        <button type="submit" class="btn-submit-simple">
+                            <i class="fas fa-paper-plane"></i> Опубликовать отзыв
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Список отзывов - ПРОСТЫЕ СТИЛИ -->
+                <div class="reviews-simple">
+                    <div class="reviews-header-simple">
+                        <h3><i class="fas fa-comments"></i> Отзывы зрителей</h3>
+                        <span class="reviews-count-simple">{{ reviews.count }} отзывов</span>
+                    </div>
+
+                    {% if reviews %}
+                        <div class="reviews-list-simple">
+                            {% for review in reviews %}
+                            <div class="review-item-simple">
+                                <div class="review-header-simple">
+                                    <div class="review-author-simple">{{ review.author_name }}</div>
+                                    <div class="review-rating-simple">{{ review.rating }}/10</div>
+                                </div>
+                                <div class="review-date-simple">
+                                    <i class="far fa-clock"></i>
+                                    {{ review.created_at|date:"d.m.Y H:i" }}
+                                </div>
+                                <div class="review-text-simple">
+                                    {{ review.text|linebreaks }}
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <div class="no-reviews-simple">
+                            <i class="far fa-comment-slash"></i>
+                            <h4>Пока нет отзывов</h4>
+                            <p>Будьте первым, кто поделится мнением об этом фильме!</p>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Добавим немного стилей прямо в шаблон -->
+<style>
+.movie-header-info {
+    margin-bottom: 1.5rem;
+}
+
+.top-badge-large {
+    display: block; /* Изменено с inline-block на block */
+    background: linear-gradient(135deg, #e50914, #ff6b6b);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    width: fit-content;
+}
+
+.rating-compact {
+    background: #1a1a1a;
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid #333;
+    margin-bottom: 20px;
+    display: block; /* Изменено с inline-block на block */
+    width: fit-content;
+}
+</style>
+
+<!-- JavaScript для выбора рейтинга -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Выбор рейтинга
+    const ratingButtons = document.querySelectorAll('.rating-btn');
+    const ratingInput = document.getElementById('ratingValue');
+
+    ratingButtons.forEach(btn => {
+        btn.addEventListener('click', function() {
+            // Убираем выделение у всех
+            ratingButtons.forEach(b => b.classList.remove('selected'));
+            // Выделяем текущую
+            this.classList.add('selected');
+            // Устанавливаем значение
+            ratingInput.value = this.dataset.value;
+        });
+    });
+
+    // Выделяем рейтинг по умолчанию (8)
+    const defaultBtn = document.querySelector('.rating-btn[data-value="8"]');
+    if (defaultBtn) {
+        defaultBtn.classList.add('selected');
+    }
+
+    // Валидация формы
+    const reviewForm = document.getElementById('reviewForm');
+    if (reviewForm) {
+        reviewForm.addEventListener('submit', function(e) {
+            const rating = ratingInput.value;
+            const authorName = document.getElementById('author_name').value.trim();
+            const reviewText = document.getElementById('review_text').value.trim();
+
+            if (!authorName) {
+                e.preventDefault();
+                alert('Пожалуйста, введите ваше имя');
+                return;
+            }
+
+            if (rating < 1 || rating > 10) {
+                e.preventDefault();
+                alert('Пожалуйста, выберите оценку от 1 до 10');
+                return;
+            }
+
+            if (!reviewText) {
+                e.preventDefault();
+                alert('Пожалуйста, напишите текст отзыва');
+                return;
+            }
+        });
+    }
+});
+</script>
+{% endblock %}

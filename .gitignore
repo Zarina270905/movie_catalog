@@ -1,0 +1,62 @@
+# .gitignore
+
+# === ВАШИ ТЕКУЩИЕ НАСТРОЙКИ ===
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Database
+*.sqlite3
+*.db
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.env/
+venv/
+env/
+ENV/
+
+# === ДОПОЛНИТЕЛЬНО ДЛЯ DJANGO ===
+# Django media and static
+/media/
+/staticfiles/
+/static/
+
+# Logs
+*.log
+logs/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Testing
+.coverage
+htmlcov/
+.pytest_cache/
+
+# Project specific
+migrations/00*.py  # начальные миграции (генерируются автоматически)
+!migrations/__init__.py
+
+# PyCharm
+.idea/
+
+# VS Code
+.vscode/

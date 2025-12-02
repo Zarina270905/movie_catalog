@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}MovieCatalog - Главная{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="header-section">
+        <h1>Коллекция фильмов</h1>
+        {% if query %}
+            <p class="search-results">Результаты поиска для: "{{ query }}"</p>
+        {% endif %}
+
+        <!-- Сообщения -->
+        {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+            <div class="message {{ message.tags }}">
+                {{ message }}
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <!-- Статус топа -->
+        <div class="top-status">
+            <p>Фильмов в топе: {{ top_count }}/5</p>
+        </div>
+    </div>
+
+    <div class="movies-grid">
+        {% for movie in movies %}
+        <div class="movie-card">
+            <a href="{% url 'movie_detail' movie.id %}" class="movie-link">
+                <div class="movie-poster">
+                    {% if movie.poster %}
+                        <img src="{{ movie.poster.url }}" alt="{{ movie.title }}">
+                    {% else %}
+                        <div class="no-poster">
+                            <i class="fas fa-film"></i>
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="movie-info">
+                    <h3 class="movie-title">{{ movie.title }}</h3>
+                    <p class="movie-year">{{ movie.year }}</p>
+                    {% if movie.is_top %}
+                        <span class="top-badge">Топ</span>
+                    {% endif %}
+                </div>
+            </a>
+
+            <!-- Кнопки управления топом -->
+            <div class="movie-actions">
+                {% if movie.is_top %}
+                    <form method="post" class="top-form">
+                        {% csrf_token %}
+                        <input type="hidden" name="movie_id" value="{{ movie.id }}">
+                        <input type="hidden" name="action" value="remove_from_top">
+                        <button type="submit" class="btn-remove-top" title="Удалить из топа">
+                            <i class="fas fa-star"></i> Убрать из топа
+                        </button>
+                    </form>
+                {% else %}
+                    <form method="post" class="top-form">
+                        {% csrf_token %}
+                        <input type="hidden" name="movie_id" value="{{ movie.id }}">
+                        <input type="hidden" name="action" value="add_to_top">
+                        <button type="submit" class="btn-add-top" title="Добавить в топ">
+                            <i class="far fa-star"></i> В топ
+                        </button>
+                    </form>
+                {% endif %}
+            </div>
+        </div>
+        {% empty %}
+        <div class="no-movies">
+            <i class="fas fa-film fa-3x"></i>
+            <h3>Фильмы не найдены</h3>
+            <p>Попробуйте изменить поисковый запрос</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

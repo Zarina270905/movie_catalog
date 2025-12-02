@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}MovieCatalog - Актеры{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="header-section">
+        <h1>Актеры</h1>
+        <p class="subtitle">Все актеры в нашей коллекции</p>
+    </div>
+
+    <div class="actors-grid">
+        {% for actor in actors %}
+        <div class="actor-card">
+            <a href="{% url 'actor_detail' actor.id %}" class="actor-link">
+                <div class="actor-photo">
+                    {% if actor.photo %}
+                        <img src="{{ actor.photo.url }}" alt="{{ actor.name }}">
+                    {% else %}
+                        <div class="no-photo">
+                            <i class="fas fa-user"></i>
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="actor-info">
+                    <h3 class="actor-name">{{ actor.name }}</h3>
+                    <p class="actor-movies-count">
+                        Фильмов в коллекции: {{ actor.movie_set.count }}
+                    </p>
+                </div>
+            </a>
+        </div>
+        {% empty %}
+        <div class="no-actors">
+            <i class="fas fa-user fa-3x"></i>
+            <h3>Актеры не найдены</h3>
+            <p>Добавьте актеров через админ-панель</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

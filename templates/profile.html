@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Профиль - {{ user.username }}{% endblock %}
+
+{% block content %}
+<div class="profile-container">
+    <div class="profile-card">
+        <div class="profile-header">
+            <div class="profile-avatar">
+                <i class="fas fa-user-circle"></i>
+            </div>
+            <div class="profile-info">
+                <h2>{{ user.username }}</h2>
+                <div class="profile-role">
+                    {% if user.is_staff %}
+                        {% if user.is_superuser %}
+                            <span class="role-badge admin">
+                                <i class="fas fa-shield-alt"></i> Администратор
+                            </span>
+                        {% else %}
+                            <span class="role-badge manager">
+                                <i class="fas fa-crown"></i> Менеджер
+                            </span>
+                        {% endif %}
+                    {% else %}
+                        <span class="role-badge user">
+                            <i class="fas fa-user"></i> Обычный пользователь
+                        </span>
+                    {% endif %}
+                </div>
+                <p class="profile-email"><i class="fas fa-envelope"></i> {{ user.email }}</p>
+                <p class="profile-date"><i class="fas fa-calendar-alt"></i> Зарегистрирован: {{ user.date_joined|date:"d.m.Y" }}</p>
+            </div>
+        </div>
+
+        <div class="profile-stats">
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-film"></i>
+                </div>
+                <div class="stat-info">
+                    <h3>{{ user_movies }}</h3>
+                    <p>Фильмов в каталоге</p>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-comment"></i>
+                </div>
+                <div class="stat-info">
+                    <h3>{{ user_reviews }}</h3>
+                    <p>Написано отзывов</p>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-calendar"></i>
+                </div>
+                <div class="stat-info">
+                    <h3>{{ user.date_joined|date:"Y" }}</h3>
+                    <p>Год регистрации</p>
+                </div>
+            </div>
+        </div>
+
+        {% if user.is_staff %}
+        <div class="manager-permissions">
+            <h3><i class="fas fa-check-circle"></i> Права менеджера:</h3>
+            <ul>
+                <li><i class="fas fa-plus"></i> Добавление новых фильмов</li>
+                <li><i class="fas fa-plus"></i> Добавление актеров</li>
+                <li><i class="fas fa-plus"></i> Добавление режиссеров</li>
+                <li><i class="fas fa-star"></i> Управление топ-5 фильмами</li>
+            </ul>
+        </div>
+        {% endif %}
+
+        <div class="profile-actions">
+            <a href="{% url 'index' %}" class="btn-back">
+                <i class="fas fa-arrow-left"></i> На главную
+            </a>
+            {% if user.is_staff %}
+            <a href="{% url 'add_movie' %}" class="btn-add">
+                <i class="fas fa-plus"></i> Добавить фильм
+            </a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
