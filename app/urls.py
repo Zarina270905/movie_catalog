@@ -22,6 +22,7 @@ urlpatterns = [
     path('add/movie/', views.add_movie, name='add_movie'),
     path('add/director/', views.add_director, name='add_director'),
     path('add/actor/', views.add_actor, name='add_actor'),
+
 ]
 
 if settings.DEBUG:

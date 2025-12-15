@@ -8,6 +8,7 @@
     <div class="auth-card">
         <h2><i class="fas fa-sign-in-alt"></i> Вход в систему</h2>
 
+        <!-- Обычная форма входа (оставляем как есть) -->
         <form method="post" class="auth-form">
             {% csrf_token %}
 
@@ -27,6 +28,18 @@
                 <i class="fas fa-sign-in-alt"></i> Войти
             </button>
         </form>
+
+        <!-- НОВЫЙ БЛОК: Кнопка входа через Яндекс -->
+        <div class="social-login">
+            <p style="margin: 20px 0; color: #666; text-align: center;">Или войдите через:</p>
+            <a href="{% url 'social:begin' 'yandex-oauth2' %}" class="btn-yandex" style="display: block; text-align: center;">
+                <svg width="20" height="20" style="margin-right:10px; vertical-align: middle;">
+                    <rect width="20" height="20" fill="#FFCC00"/>
+                    <text x="10" y="14" text-anchor="middle" fill="#000" font-size="14" font-weight="bold">Я</text>
+                </svg>
+                Войти через Яндекс
+            </a>
+        </div>
 
         <div class="auth-links">
             <p>Нет аккаунта? <a href="{% url 'register' %}">Зарегистрироваться</a></p>

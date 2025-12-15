@@ -4,7 +4,21 @@ Django settings for movie_project project.
 
 from pathlib import Path
 import os
-from decouple import config
+
+
+def config(key, default=None, cast=None):
+    value = os.environ.get(key)
+    if value is None:
+        return default
+
+    if cast:
+        if cast == bool:
+            return str(value).lower() in ('true', '1', 'yes', 't')
+        try:
+            return cast(value)
+        except (ValueError, TypeError):
+            return default
+    return value
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -13,7 +27,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # НАСТРОЙКИ ИЗ ПЕРЕМЕННЫХ ОКРУЖЕНИЯ
 # ============================================
 
-SECRET_KEY = config('SECRET_KEY', default='django-insecure-fallback-key')
+SECRET_KEY = config('SECRET_KEY', 'django-insecure-fallback-key')
 DEBUG = config('DEBUG', default=True, cast=bool)
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='localhost,127.0.0.1').split(',')
 
@@ -28,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'social_django',  # ← ДОБАВЬТЕ ЭТО
     'app',  # ваше приложение
 ]
 
@@ -203,3 +218,46 @@ LOGGING = {
         'level': LOG_LEVEL,
     },
 }
+
+# =============== Яндекс OAuth настройки ===============
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.yandex.YandexOAuth2',     # Яндекс вход
+    'django.contrib.auth.backends.ModelBackend',    # обычный вход
+)
+
+# Ключи Яндекс OAuth
+SOCIAL_AUTH_YANDEX_OAUTH2_KEY = config('YANDEX_OAUTH2_KEY', default='')
+SOCIAL_AUTH_YANDEX_OAUTH2_SECRET = config('YANDEX_OAUTH2_SECRET', default='')
+
+# Настройки авторизации
+SOCIAL_AUTH_PIPELINE = (
+    'social_core.pipeline.social_auth.social_details',
+    'social_core.pipeline.social_auth.social_uid',
+    'social_core.pipeline.social_auth.auth_allowed',
+    'social_core.pipeline.social_auth.social_user',
+    'social_core.pipeline.user.get_username',
+    'social_core.pipeline.user.create_user',  # ← ОСТАВЛЯЕМ! создание пользователя
+    'social_core.pipeline.social_auth.associate_by_email',
+    'social_core.pipeline.social_auth.associate_user',
+    'social_core.pipeline.social_auth.load_extra_data',
+    'social_core.pipeline.user.user_details',
+)
+
+
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/'
+SOCIAL_AUTH_LOGIN_ERROR_URL = '/login/'
+SOCIAL_AUTH_URL_NAMESPACE = 'social'
+# =====================================================
+# Дополнительные настройки Яндекс OAuth
+SOCIAL_AUTH_YANDEX_OAUTH2_SCOPE = ['login:info', 'login:email']
+SOCIAL_AUTH_YANDEX_OAUTH2_AUTH_EXTRA_ARGUMENTS = {
+    'force_confirm': 'yes'  # Всегда запрашивать подтверждение
+}
+
+# Имя поля для username
+SOCIAL_AUTH_USERNAME_IS_FULL_EMAIL = False
+SOCIAL_AUTH_CLEAN_USERNAMES = True
+SOCIAL_AUTH_SLUGIFY_USERNAMES = True
+
+# Разрешить создание пользователей
+SOCIAL_AUTH_CREATE_USERS = True  # ← Разрешить созданиеSOCIAL_AUTH_ASSOCIATE_BY_EMAIL = True  # Только связывать по email
