@@ -42,8 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'social_django',  # ← ДОБАВЬТЕ ЭТО
-    'app',  # ваше приложение
+    'social_django',
+    'app',
 ]
 
 MIDDLEWARE = [

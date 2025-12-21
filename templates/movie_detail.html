@@ -126,7 +126,6 @@
                                    value="{{ form.author_name.value|default:'' }}">
                         </div>
 
-                        <!-- Ваша оценка (1-10) -->
                         <div class="form-group-simple">
                             <label>Ваша оценка (1-10)</label>
                             <div class="rating-buttons" id="ratingButtons">
@@ -138,7 +137,6 @@
                             <input type="hidden" name="rating" id="ratingValue" value="8" required>
                         </div>
 
-                        <!-- Текст отзыва -->
                         <div class="form-group-simple">
                             <label for="review_text">Текст отзыва</label>
                             <textarea name="text"
@@ -155,7 +153,6 @@
                     </form>
                 </div>
 
-                <!-- Список отзывов - ПРОСТЫЕ СТИЛИ -->
                 <div class="reviews-simple">
                     <div class="reviews-header-simple">
                         <h3><i class="fas fa-comments"></i> Отзывы зрителей</h3>
@@ -193,14 +190,13 @@
     </div>
 </div>
 
-<!-- Добавим немного стилей прямо в шаблон -->
 <style>
 .movie-header-info {
     margin-bottom: 1.5rem;
 }
 
 .top-badge-large {
-    display: block; /* Изменено с inline-block на block */
+    display: block;
     background: linear-gradient(135deg, #e50914, #ff6b6b);
     color: white;
     padding: 0.5rem 1rem;
@@ -216,7 +212,7 @@
     border-radius: 10px;
     border: 1px solid #333;
     margin-bottom: 20px;
-    display: block; /* Изменено с inline-block на block */
+    display: block;
     width: fit-content;
 }
 </style>

@@ -100,7 +100,7 @@ def movie_detail(request, movie_id):
                     review.movie = movie
                     review.author_name = request.user.username
                     review.save()
-                    messages.success(request, '✅ Ваш отзыв успешно добавлен!')
+                    messages.success(request, 'Ваш отзыв успешно добавлен!')
                     return redirect('movie_detail', movie_id=movie_id)
                 else:
                     for field, errors in form.errors.items():
@@ -120,7 +120,7 @@ def movie_detail(request, movie_id):
     return render(request, 'movie_detail.html', context)
 
 
-# === ФУНКЦИИ ДОБАВЛЕНИЯ КОНТЕНТА (ТОЛЬКО ДЛЯ МЕНЕДЖЕРОВ) ===
+# ФУНКЦИИ ДОБАВЛЕНИЯ КОНТЕНТА (ТОЛЬКО ДЛЯ МЕНЕДЖЕРОВ)
 
 @user_passes_test(is_manager, login_url='/accounts/login/')
 def add_movie(request):
@@ -176,7 +176,7 @@ def add_actor(request):
     })
 
 
-# === РЕГИСТРАЦИЯ И АВТОРИЗАЦИЯ ===
+# РЕГИСТРАЦИЯ И АВТОРИЗАЦИЯ
 
 def register_view(request):
     if request.user.is_authenticated:
@@ -225,15 +225,15 @@ def register_view(request):
                     fail_silently=False,
                 )
 
-                print("✅ Письмо отправлено успешно!")
+                print(" Письмо отправлено успешно!")
 
             except Exception as e:
-                print(f"❌ Ошибка при отправке письма: {e}")
+                print(f"Ошибка при отправке письма: {e}")
                 import traceback
                 traceback.print_exc()
 
-            # Автоматический вход после регистрации
-            login(request, user)
+            # Автоматический вход после регистрации (УКАЗЫВАЕМ БЭКЕНД)
+            login(request, user, backend='django.contrib.auth.backends.ModelBackend')
 
             messages.success(request,
                              f'Регистрация успешна! Добро пожаловать, {user.username}! '
@@ -262,7 +262,8 @@ def login_view(request):
             user = authenticate(request, username=username, password=password)
 
             if user is not None:
-                login(request, user)
+                # Указываем бэкенд для входа
+                login(request, user, backend='django.contrib.auth.backends.ModelBackend')
                 messages.success(request, f'Добро пожаловать, {user.username}!')
                 return redirect('index')
         else:
@@ -280,7 +281,6 @@ def logout_view(request):
     return redirect('index')
 
 
-# === ПРОФИЛЬ ПОЛЬЗОВАТЕЛЯ ===
 
 @login_required
 def profile_view(request):
@@ -296,7 +296,6 @@ def profile_view(request):
     return render(request, 'profile.html', context)
 
 
-# === ОСТАЛЬНЫЕ ФУНКЦИИ ===
 
 def top_five(request):
     top_movies = Movie.objects.filter(is_top=True).order_by('-year')

@@ -46,7 +46,7 @@ class Actor(models.Model):
 class Review(models.Model):
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE, related_name='reviews')
     author_name = models.CharField(max_length=100)
-    rating = models.IntegerField(choices=[(i, str(i)) for i in range(1, 6)])
+    rating = models.IntegerField(choices=[(i, str(i)) for i in range(1, 11)])
     text = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     is_active = models.BooleanField(default=True)

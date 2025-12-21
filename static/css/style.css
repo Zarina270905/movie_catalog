@@ -1,0 +1,2168 @@
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #0f0f0f;
+    color: #fff;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Navigation - исправленная версия */
+.navbar {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    padding: 1rem 0;
+    border-bottom: 1px solid #333;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.nav-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    position: relative;
+    min-height: 60px;
+}
+
+/* Логотип */
+.nav-logo {
+    flex-shrink: 0;
+    min-width: 160px;
+}
+
+.nav-logo a {
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: #e50914;
+    text-decoration: none;
+    transition: color 0.3s;
+    white-space: nowrap;
+}
+
+.nav-logo a:hover {
+    color: #ff6b6b;
+}
+
+/* Меню навигации - исправленное */
+.nav-menu {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    flex-wrap: nowrap;
+    overflow: visible;
+    margin: 0 auto;
+    max-width: 600px;
+    justify-content: center;
+}
+
+.nav-link {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s;
+    padding: 0.5rem 0.8rem;
+    border-radius: 5px;
+    white-space: nowrap;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+.nav-link i {
+    font-size: 0.9rem;
+    min-width: 16px;
+}
+
+.nav-link:hover {
+    color: #e50914;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* Кнопка "Добавить" */
+.add-btn {
+    background: linear-gradient(135deg, #27ae60, #2ecc71) !important;
+    color: white !important;
+    border: none !important;
+    cursor: pointer;
+    padding: 0.5rem 0.8rem !important;
+    border-radius: 8px !important;
+    font-weight: 600 !important;
+    transition: all 0.3s !important;
+    display: flex !important;
+    align-items: center;
+    gap: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.add-btn:hover {
+    background: linear-gradient(135deg, #2ecc71, #27ae60) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(46, 204, 113, 0.4);
+}
+
+/* Поиск - компактный */
+.nav-search {
+    flex-shrink: 1;
+    min-width: 250px;
+    max-width: 300px;
+}
+
+.search-form {
+    display: flex;
+    background: #333;
+    border-radius: 25px;
+    overflow: hidden;
+    width: 100%;
+}
+
+.search-form input {
+    flex-grow: 1;
+    padding: 0.6rem 1rem;
+    border: none;
+    background: transparent;
+    color: #fff;
+    outline: none;
+    font-size: 0.85rem;
+    min-width: 0;
+}
+
+.search-form input::placeholder {
+    color: #999;
+    font-size: 0.85rem;
+}
+
+.search-form button {
+    padding: 0.6rem 1rem;
+    border: none;
+    background: #e50914;
+    color: white;
+    cursor: pointer;
+    transition: background 0.3s;
+    flex-shrink: 0;
+    font-size: 0.85rem;
+}
+
+.search-form button:hover {
+    background: #ff6b6b;
+}
+
+/* Аутентификация - компактная */
+.nav-auth {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    flex-shrink: 0;
+    min-width: 140px;
+    justify-content: flex-end;
+}
+
+/* Компактная информация о пользователе */
+.user-info-display {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.4rem 0.8rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 18px;
+    border: 1px solid #333;
+    max-width: 180px;
+    overflow: hidden;
+    transition: all 0.3s;
+    cursor: default;
+}
+
+.user-info-display:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: #444;
+}
+
+.user-info-display i {
+    color: #e50914;
+    font-size: 0.9rem;
+    flex-shrink: 0;
+}
+
+.user-name {
+    font-weight: 500;
+    color: #fff;
+    font-size: 0.85rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 120px;
+}
+
+/* Кнопка настроек */
+.settings-btn {
+    background: #333;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+    border: 1px solid #444;
+}
+
+.settings-btn:hover {
+    background: #e50914;
+    transform: rotate(90deg);
+    border-color: #e50914;
+}
+
+.settings-btn i {
+    font-size: 0.9rem;
+}
+
+/* Кнопка регистрации - компактная */
+.btn-register {
+    background: linear-gradient(135deg, #e50914, #ff6b6b) !important;
+    color: white !important;
+    padding: 0.5rem 1rem !important;
+    border-radius: 8px !important;
+    border: none !important;
+    font-weight: 600 !important;
+    transition: all 0.3s !important;
+    white-space: nowrap;
+    font-size: 0.85rem !important;
+    display: flex !important;
+    align-items: center;
+    gap: 5px;
+}
+
+.btn-register:hover {
+    background: linear-gradient(135deg, #ff6b6b, #e50914) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 5px 15px rgba(229, 9, 20, 0.4) !important;
+}
+
+/* Dropdown меню */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background: #1a1a1a;
+    min-width: 220px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    z-index: 1001;
+    border-radius: 10px;
+    border: 1px solid #333;
+    padding: 0.5rem 0;
+    margin-top: 0.5rem;
+    right: 0;
+    animation: fadeIn 0.2s ease;
+    top: 100%;
+}
+
+.dropdown-content.show {
+    display: block;
+}
+
+.dropdown-content a {
+    color: #fff;
+    padding: 0.7rem 1rem;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.2s;
+    font-size: 0.95rem;
+    white-space: nowrap;
+}
+
+.dropdown-content a:hover {
+    background: #333;
+    color: #e50914;
+    padding-left: 1.2rem;
+}
+
+.dropdown-content hr {
+    border: none;
+    border-top: 1px solid #333;
+    margin: 0.5rem 1rem;
+}
+
+/* Стили для отображения роли в dropdown */
+.user-role {
+    color: #e50914;
+    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 1px solid #333;
+    margin-bottom: 0.5rem;
+    background: rgba(229, 9, 20, 0.1);
+    border-radius: 5px 5px 0 0;
+}
+
+.user-role i {
+    font-size: 0.9rem;
+}
+
+/* Ссылка выхода - выделенная */
+.logout-link {
+    color: #ff6b6b !important;
+    font-weight: 600;
+    margin-top: 0.5rem;
+    border-top: 1px solid #333;
+    padding-top: 0.5rem;
+}
+
+.logout-link:hover {
+    color: #ff4444 !important;
+    background: rgba(255, 107, 107, 0.1) !important;
+}
+
+/* Анимация появления dropdown */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Main content */
+.main-content {
+    min-height: calc(100vh - 140px);
+    padding: 2rem 0;
+}
+
+.header-section {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+/* Новые стили для заголовка с разными шрифтами */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Oswald:wght@600;700&family=Raleway:wght@700;800&family=Poppins:wght@700;800&display=swap');
+
+/* Вариант 1 - Montserrat (современный) */
+.header-section h1.montserrat-font {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 3.2rem;
+    font-weight: 800;
+    color: #ffffff;
+    text-align: center;
+    margin-bottom: 0.5rem;
+    text-shadow: 3px 3px 12px rgba(229, 9, 20, 0.6);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+/* Вариант 2 - Oswald (кинематографичный) */
+.header-section h1.oswald-font {
+    font-family: 'Oswald', sans-serif;
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: #ffffff;
+    text-align: center;
+    margin-bottom: 0.5rem;
+    text-shadow: 2px 2px 15px rgba(229, 9, 20, 0.7);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+/* Вариант 3 - Raleway (элегантный) */
+.header-section h1.raleway-font {
+    font-family: 'Raleway', sans-serif;
+    font-size: 3rem;
+    font-weight: 800;
+    color: #ffffff;
+    text-align: center;
+    margin-bottom: 0.5rem;
+    text-shadow: 2px 2px 10px rgba(229, 9, 20, 0.5);
+    letter-spacing: 1px;
+}
+
+/* Вариант 4 - Poppins (минималистичный) */
+.header-section h1.poppins-font {
+    font-family: 'Poppins', sans-serif;
+    font-size: 3rem;
+    font-weight: 700;
+    color: #ffffff;
+    text-align: center;
+    margin-bottom: 0.5rem;
+    text-shadow: 2px 2px 8px rgba(229, 9, 20, 0.5);
+    letter-spacing: 0.5px;
+}
+
+/* Вариант 5 - Cinematic с градиентом */
+.header-section h1.cinematic-font {
+    font-family: 'Oswald', sans-serif;
+    font-size: 3.8rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #e50914 0%, #ff6b6b 50%, #ffffff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-align: center;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 0 30px rgba(229, 9, 20, 0.8);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+/* Старый стиль заголовка (оставлен для совместимости) */
+.header-section h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(135deg, #e50914, #ff6b6b);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.subtitle {
+    color: #999;
+    font-size: 1.1rem;
+}
+
+.search-results {
+    color: #e50914;
+    font-size: 1.1rem;
+    margin-top: 1rem;
+}
+
+/* Movies grid */
+.movies-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.movie-card {
+    background: #1a1a1a;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+    border: 1px solid #333;
+}
+
+.movie-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(229, 9, 20, 0.3);
+}
+
+.movie-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+.movie-poster {
+    width: 100%;
+    height: 350px;
+    overflow: hidden;
+}
+
+.movie-poster img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s;
+}
+
+.movie-card:hover .movie-poster img {
+    transform: scale(1.05);
+}
+
+.no-poster {
+    width: 100%;
+    height: 100%;
+    background: #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #666;
+    font-size: 3rem;
+}
+
+.movie-info {
+    padding: 1rem;
+}
+
+.movie-title {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    color: #fff;
+    line-height: 1.3;
+}
+
+.movie-year {
+    color: #999;
+    font-size: 0.9rem;
+}
+
+.top-badge {
+    display: inline-block;
+    background: #e50914;
+    color: white;
+    padding: 0.25rem 0.5rem;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    margin-top: 0.5rem;
+}
+
+/* No movies state */
+.no-movies, .no-top-movies {
+    text-align: center;
+    padding: 4rem 2rem;
+    color: #666;
+    grid-column: 1 / -1;
+}
+
+.no-movies i, .no-top-movies i {
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+.no-movies h3, .no-top-movies h3 {
+    margin-bottom: 1rem;
+    color: #999;
+}
+
+/* Movie detail page */
+.movie-detail {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #e50914;
+    text-decoration: none;
+    margin-bottom: 2rem;
+    transition: color 0.3s;
+}
+
+.back-link:hover {
+    color: #ff6b6b;
+}
+
+.detail-content {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 3rem;
+    align-items: start;
+}
+
+.detail-poster {
+    position: sticky;
+    top: 2rem;
+}
+
+.detail-poster img {
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.no-poster-large {
+    width: 100%;
+    height: 450px;
+    background: #333;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #666;
+    font-size: 4rem;
+}
+
+.detail-info {
+    padding: 1rem 0;
+}
+
+.detail-title {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: #fff;
+}
+
+.top-badge-large {
+    display: inline-block;
+    background: linear-gradient(135deg, #e50914, #ff6b6b);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    margin-bottom: 2rem;
+}
+
+.detail-section {
+    margin-bottom: 2rem;
+}
+
+.detail-section h3 {
+    color: #e50914;
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.actors-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.actor-tag {
+    background: #333;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    transition: all 0.3s;
+    text-decoration: none;
+    color: #fff;
+    display: inline-block;
+    border: none;
+    cursor: pointer;
+}
+
+.actor-tag:hover {
+    background: #e50914;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(229, 9, 20, 0.3);
+    text-decoration: none;
+}
+
+.description {
+    line-height: 1.8;
+    color: #ccc;
+}
+
+/* Top movies list */
+.top-movies-list {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.top-movie-item {
+    display: grid;
+    grid-template-columns: 60px 120px 1fr;
+    gap: 1.5rem;
+    align-items: start;
+    background: #1a1a1a;
+    padding: 1.5rem;
+    border-radius: 10px;
+    margin-bottom: 1.5rem;
+    border: 1px solid #333;
+    transition: transform 0.3s;
+}
+
+.top-movie-item:hover {
+    transform: translateX(5px);
+    border-color: #e50914;
+}
+
+.top-number {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #e50914;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.top-movie-poster {
+    width: 120px;
+    height: 160px;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.top-movie-poster img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.top-movie-info {
+    padding: 0.5rem 0;
+}
+
+.top-movie-title {
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+}
+
+.top-movie-title a {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.top-movie-title a:hover {
+    color: #e50914;
+}
+
+.top-movie-year {
+    color: #e50914;
+    font-weight: bold;
+    margin-bottom: 0.25rem;
+}
+
+.top-movie-director {
+    color: #999;
+    margin-bottom: 0.5rem;
+}
+
+.top-movie-director a {
+    color: #e50914;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.top-movie-director a:hover {
+    color: #ff6b6b;
+    text-decoration: underline;
+}
+
+.top-movie-description {
+    color: #ccc;
+    margin-bottom: 1rem;
+    line-height: 1.5;
+}
+
+.detail-link {
+    color: #e50914;
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: color 0.3s;
+}
+
+.detail-link:hover {
+    color: #ff6b6b;
+}
+
+.btn-primary {
+    display: inline-block;
+    background: #e50914;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background 0.3s;
+    margin-top: 1rem;
+}
+
+.btn-primary:hover {
+    background: #ff6b6b;
+}
+
+/* Footer */
+.footer {
+    background: #1a1a1a;
+    padding: 2rem 0;
+    border-top: 1px solid #333;
+    margin-top: 4rem;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    text-align: center;
+    color: #666;
+}
+
+.footer-links a {
+    color: #e50914;
+    text-decoration: none;
+    margin: 0 5px;
+    transition: color 0.3s;
+}
+
+.footer-links a:hover {
+    color: #ff6b6b;
+}
+
+/* Directors and Actors grids */
+.directors-grid, .actors-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.director-card, .actor-card {
+    background: #1a1a1a;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+    border: 1px solid #333;
+    text-align: center;
+}
+
+.director-card:hover, .actor-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(229, 9, 20, 0.3);
+}
+
+.director-photo, .actor-photo {
+    width: 100%;
+    height: 250px;
+    overflow: hidden;
+}
+
+.director-photo img, .actor-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.no-photo {
+    width: 100%;
+    height: 100%;
+    background: #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #666;
+    font-size: 3rem;
+}
+
+.director-info, .actor-info {
+    padding: 1.5rem 1rem;
+}
+
+.director-name, .actor-name {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    color: #fff;
+    transition: color 0.3s;
+}
+
+.director-movies-count, .actor-movies-count {
+    color: #999;
+    font-size: 0.9rem;
+}
+
+.no-directors, .no-actors {
+    text-align: center;
+    padding: 4rem 2rem;
+    color: #666;
+    grid-column: 1 / -1;
+}
+
+.no-directors i, .no-actors i {
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+.no-directors h3, .no-actors h3 {
+    margin-bottom: 1rem;
+    color: #999;
+}
+
+/* Person detail pages */
+.person-header {
+    margin-bottom: 3rem;
+}
+
+.person-info {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 2rem;
+    align-items: start;
+    margin-top: 1rem;
+}
+
+.person-photo {
+    width: 200px;
+    height: 250px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.person-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.no-photo-large {
+    width: 100%;
+    height: 100%;
+    background: #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #666;
+    font-size: 4rem;
+    border-radius: 10px;
+}
+
+.person-details {
+    padding: 1rem 0;
+}
+
+.person-name {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: #fff;
+}
+
+.person-movies-count {
+    color: #e50914;
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.filmography-section {
+    margin-top: 2rem;
+}
+
+.section-title {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    color: #fff;
+    text-align: center;
+}
+
+.actor-link, .director-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+.actor-card:hover .actor-name,
+.director-card:hover .director-name {
+    color: #e50914;
+}
+
+.movie-actors {
+    margin-top: 0.5rem;
+    font-size: 0.85rem;
+    color: #ccc;
+}
+
+.movie-actors a {
+    color: #999;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.movie-actors a:hover {
+    color: #e50914;
+    text-decoration: underline;
+}
+
+.actor-name {
+    color: #999;
+}
+
+.movie-director {
+    color: #999;
+    font-size: 0.9rem;
+    margin-top: 0.25rem;
+}
+
+.movie-director a {
+    color: #e50914;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.movie-director a:hover {
+    color: #ff6b6b;
+    text-decoration: underline;
+}
+
+/* Кликабельные ссылки актеров и режиссеров */
+.person-link {
+    color: #e50914;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+    font-size: 1.1rem;
+}
+
+.person-link:hover {
+    color: #ff6b6b;
+    text-decoration: underline;
+}
+
+/* Кнопки управления топом */
+.movie-actions {
+    padding: 0 1rem 1rem;
+    text-align: center;
+}
+
+.top-form {
+    margin: 0;
+}
+
+.btn-add-top, .btn-remove-top {
+    width: 100%;
+    padding: 0.5rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.btn-add-top {
+    background: #333;
+    color: #fff;
+    border: 1px solid #555;
+}
+
+.btn-add-top:hover {
+    background: #e50914;
+    color: white;
+    transform: translateY(-2px);
+}
+
+.btn-remove-top {
+    background: #e50914;
+    color: white;
+    border: 1px solid #e50914;
+}
+
+.btn-remove-top:hover {
+    background: #ff6b6b;
+    transform: translateY(-2px);
+}
+
+/* Кнопки на странице фильма */
+.detail-actions {
+    margin-top: 1rem;
+    text-align: center;
+}
+
+.btn-add-top.large, .btn-remove-top.large {
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    width: auto;
+}
+
+/* Сообщения */
+.messages {
+    margin: 1rem 0;
+}
+
+.message {
+    padding: 0.75rem 1rem;
+    border-radius: 5px;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    animation: slideIn 0.3s ease;
+    border-left: 4px solid transparent;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.message.success {
+    background: rgba(39, 174, 96, 0.15);
+    color: #2ecc71;
+    border-left-color: #27ae60;
+    border: 1px solid rgba(39, 174, 96, 0.3);
+}
+
+.message.error {
+    background: rgba(231, 76, 60, 0.15);
+    color: #e74c3c;
+    border-left-color: #c0392b;
+    border: 1px solid rgba(231, 76, 60, 0.3);
+}
+
+.message.info {
+    background: rgba(52, 152, 219, 0.15);
+    color: #3498db;
+    border-left-color: #2980b9;
+    border: 1px solid rgba(52, 152, 219, 0.3);
+}
+
+.message.warning {
+    background: rgba(241, 196, 15, 0.15);
+    color: #f1c40f;
+    border-left-color: #f39c12;
+    border: 1px solid rgba(241, 196, 15, 0.3);
+}
+
+/* Статус топа */
+.top-status {
+    margin: 1rem 0;
+    padding: 0.5rem 1rem;
+    background: #1a1a1a;
+    border-radius: 5px;
+    border: 1px solid #333;
+    display: inline-block;
+}
+
+.top-status p {
+    margin: 0;
+    color: #e50914;
+    font-weight: 500;
+}
+
+/* ========== СТИЛИ ДЛЯ АУТЕНТИФИКАЦИИ ========== */
+
+.auth-container {
+    max-width: 450px;
+    margin: 3rem auto;
+    padding: 0 20px;
+}
+
+.auth-card {
+    background: #1a1a1a;
+    border-radius: 15px;
+    padding: 2.5rem;
+    border: 1px solid #333;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.auth-card h2 {
+    color: #fff;
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 1.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.auth-form .form-group {
+    margin-bottom: 1.5rem;
+}
+
+.auth-form label {
+    display: block;
+    color: #fff;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+
+.auth-form input {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    background: #333;
+    border: 1px solid #555;
+    border-radius: 8px;
+    color: #fff;
+    font-size: 1rem;
+    transition: all 0.3s;
+}
+
+.auth-form input:focus {
+    outline: none;
+    border-color: #e50914;
+    box-shadow: 0 0 0 3px rgba(229, 9, 20, 0.2);
+}
+
+.btn-auth {
+    width: 100%;
+    padding: 0.9rem;
+    background: linear-gradient(135deg, #e50914, #ff6b6b);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 1rem;
+}
+
+.btn-auth:hover {
+    background: linear-gradient(135deg, #ff6b6b, #e50914);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(229, 9, 20, 0.4);
+}
+
+.auth-links {
+    text-align: center;
+    margin-top: 1.5rem;
+    color: #888;
+    font-size: 0.9rem;
+}
+
+.auth-links a {
+    color: #e50914;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.auth-links a:hover {
+    color: #ff6b6b;
+    text-decoration: underline;
+}
+
+/* ========== СТИЛИ ДЛЯ ДОБАВЛЕНИЯ КОНТЕНТА ========== */
+
+.add-content-container {
+    max-width: 700px;
+    margin: 2rem auto;
+    padding: 0 20px;
+}
+
+.add-content-card {
+    background: #1a1a1a;
+    border-radius: 15px;
+    padding: 2.5rem;
+    border: 1px solid #333;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.add-content-card h2 {
+    color: #fff;
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 1.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.content-form .form-group {
+    margin-bottom: 1.8rem;
+}
+
+.content-form label {
+    display: block;
+    color: #fff;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+
+.content-form input,
+.content-form textarea,
+.content-form select {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    background: #333;
+    border: 1px solid #555;
+    border-radius: 8px;
+    color: #fff;
+    font-size: 1rem;
+    transition: all 0.3s;
+    font-family: inherit;
+}
+
+.content-form textarea {
+    min-height: 150px;
+    resize: vertical;
+}
+
+.content-form select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23fff' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 12px;
+    padding-right: 2.5rem;
+}
+
+.content-form select[multiple] {
+    background-image: none;
+    height: 150px;
+    padding-right: 1rem;
+}
+
+.content-form input:focus,
+.content-form textarea:focus,
+.content-form select:focus {
+    outline: none;
+    border-color: #e50914;
+    box-shadow: 0 0 0 3px rgba(229, 9, 20, 0.2);
+}
+
+.content-form input[type="file"] {
+    padding: 0.5rem;
+    cursor: pointer;
+}
+
+.help-text {
+    display: block;
+    color: #888;
+    font-size: 0.85rem;
+    margin-top: 0.3rem;
+    font-style: italic;
+}
+
+.error {
+    color: #ff6b6b;
+    font-size: 0.85rem;
+    margin-top: 0.3rem;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.form-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2.5rem;
+}
+
+.btn-submit {
+    flex: 1;
+    padding: 0.9rem;
+    background: linear-gradient(135deg, #27ae60, #2ecc71);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-submit:hover {
+    background: linear-gradient(135deg, #2ecc71, #27ae60);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(46, 204, 113, 0.4);
+}
+
+/* ========== СТИЛИ ДЛЯ ПРОФИЛЯ ========== */
+
+.profile-container {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 0 20px;
+}
+
+.profile-card {
+    background: #1a1a1a;
+    border-radius: 15px;
+    padding: 2.5rem;
+    border: 1px solid #333;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+}
+
+.profile-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 40px;
+    padding-bottom: 25px;
+    border-bottom: 2px solid #333;
+}
+
+.profile-avatar {
+    font-size: 100px;
+    color: #e50914;
+    margin-right: 30px;
+    flex-shrink: 0;
+}
+
+.profile-info h2 {
+    margin: 0 0 15px 0;
+    color: #fff;
+    font-size: 2.2rem;
+    font-weight: 700;
+}
+
+.profile-role {
+    margin-bottom: 15px;
+}
+
+.role-badge {
+    display: inline-block;
+    padding: 8px 20px;
+    border-radius: 25px;
+    font-weight: bold;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+}
+
+.role-badge.manager {
+    background: linear-gradient(135deg, #f39c12, #f1c40f);
+    color: #2c3e50;
+}
+
+.role-badge.admin {
+    background: linear-gradient(135deg, #e74c3c, #c0392b);
+    color: white;
+}
+
+.role-badge.user {
+    background: linear-gradient(135deg, #27ae60, #2ecc71);
+    color: white;
+}
+
+.profile-email, .profile-date {
+    margin: 8px 0;
+    color: #aaa;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.profile-email i, .profile-date i {
+    color: #e50914;
+    width: 20px;
+}
+
+/* Статистика */
+.profile-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 25px;
+    margin-bottom: 40px;
+}
+
+.stat-card {
+    background: #222;
+    padding: 25px;
+    border-radius: 12px;
+    text-align: center;
+    transition: all 0.3s ease;
+    border: 1px solid #333;
+    cursor: default;
+}
+
+.stat-card:hover {
+    transform: translateY(-8px);
+    border-color: #e50914;
+    box-shadow: 0 10px 25px rgba(229, 9, 20, 0.3);
+}
+
+.stat-icon {
+    font-size: 40px;
+    color: #e50914;
+    margin-bottom: 15px;
+}
+
+.stat-info h3 {
+    margin: 0;
+    font-size: 36px;
+    color: #fff;
+    font-weight: 700;
+}
+
+.stat-info p {
+    margin: 8px 0 0 0;
+    color: #999;
+    font-size: 0.95rem;
+}
+
+/* Права менеджера */
+.manager-permissions {
+    background: #222;
+    padding: 25px;
+    border-radius: 12px;
+    margin-bottom: 30px;
+    border: 1px solid #333;
+}
+
+.manager-permissions h3 {
+    margin-top: 0;
+    color: #fff;
+    margin-bottom: 20px;
+    font-size: 1.3rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.manager-permissions h3 i {
+    color: #f39c12;
+}
+
+.manager-permissions ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.manager-permissions li {
+    padding: 12px 0;
+    border-bottom: 1px solid #333;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #ccc;
+    font-size: 0.95rem;
+}
+
+.manager-permissions li:last-child {
+    border-bottom: none;
+}
+
+.manager-permissions li i {
+    color: #2ecc71;
+    font-size: 0.9rem;
+}
+
+/* Кнопки профиля */
+.profile-actions {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.btn-back, .btn-add {
+    padding: 14px 28px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.btn-back {
+    background: #444;
+    color: white;
+    border: 1px solid #555;
+}
+
+.btn-add {
+    background: linear-gradient(135deg, #e50914, #ff6b6b);
+    color: white;
+    border: none;
+}
+
+.btn-back:hover {
+    background: #555;
+    transform: translateY(-3px);
+    box-shadow: 0 7px 20px rgba(0, 0, 0, 0.4);
+}
+
+.btn-add:hover {
+    background: linear-gradient(135deg, #ff6b6b, #e50914);
+    transform: translateY(-3px);
+    box-shadow: 0 7px 25px rgba(229, 9, 20, 0.5);
+}
+
+/* Технические/геометрические шрифты для заголовка */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700;800&family=Rajdhani:wght@600;700&family=Exo+2:wght@700;800&family=Share+Tech+Mono&family=Audiowide&display=swap');
+
+/* Вариант 1 - Orbitron (футуристичный) */
+.header-section h1.orbitron-font {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 3rem;
+    font-weight: 800;
+    color: #ffffff;
+    text-align: center;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 0 20px rgba(229, 9, 20, 0.8);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+/* Вариант 2 - Rajdhani (технический) */
+.header-section h1.rajdhani-font {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 3.2rem;
+    font-weight: 700;
+    color: #ffffff;
+    text-align: center;
+    margin-bottom: 0.5rem;
+    text-shadow: 2px 2px 10px rgba(229, 9, 20, 0.6);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+/* Вариант 3 - Exo 2 (современный технический) */
+.header-section h1.exo-font {
+    font-family: 'Exo 2', sans-serif;
+    font-size: 3rem;
+    font-weight: 800;
+    color: #ffffff;
+    text-align: center;
+    margin-bottom: 0.5rem;
+    text-shadow: 3px 3px 15px rgba(229, 9, 20, 0.7);
+    letter-spacing: 1px;
+}
+
+/* Вариант 4 - Share Tech Mono (моноширинный) */
+.header-section h1.tech-mono-font {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: #ffffff;
+    text-align: center;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 0 15px rgba(229, 9, 20, 0.8);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+/* Вариант 5 - Audiowide (ретро-техно) */
+.header-section h1.audiowide-font {
+    font-family: 'Audiowide', cursive;
+    font-size: 3rem;
+    font-weight: 700;
+    color: #ffffff;
+    text-align: center;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 0 25px rgba(229, 9, 20, 0.9);
+    letter-spacing: 2px;
+}
+
+/* Вариант 6 - Технический с неоновым эффектом */
+.header-section h1.neon-tech-font {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: #ffffff;
+    text-align: center;
+    margin-bottom: 0.5rem;
+    text-shadow:
+        0 0 5px #fff,
+        0 0 10px #fff,
+        0 0 15px #e50914,
+        0 0 20px #e50914,
+        0 0 25px #e50914;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+/* ============= СТИЛИ ДЛЯ СТРАНИЦЫ ФИЛЬМА ============= */
+
+/* Контейнер для топа и рейтинга */
+.movie-header-info {
+    margin-bottom: 1.5rem;
+}
+
+/* Топ бейдж на странице фильма */
+.top-badge-large {
+    display: inline-block;
+    background: linear-gradient(135deg, #e50914, #ff6b6b);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    margin-left: 15px;
+    font-weight: bold;
+    box-shadow: 0 4px 10px rgba(229, 9, 20, 0.3);
+}
+
+/* Компактный рейтинг на странице фильма */
+.rating-compact {
+    background: #1a1a1a;
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid #333;
+    margin-bottom: 20px;
+    display: inline-block;
+    transition: all 0.3s;
+}
+
+.rating-compact:hover {
+    border-color: #e50914;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(229, 9, 20, 0.2);
+}
+
+.rating-header {
+    color: #e50914;
+    font-size: 14px;
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.rating-main {
+    display: flex;
+    align-items: baseline;
+    gap: 5px;
+}
+
+.rating-big {
+    font-size: 28px;
+    font-weight: bold;
+    color: #fff;
+}
+
+.rating-small {
+    font-size: 16px;
+    color: #999;
+}
+
+.rating-stats {
+    display: flex;
+    gap: 15px;
+    margin-top: 5px;
+    font-size: 12px;
+    color: #666;
+}
+
+/* Форма отзыва - ПРОСТЫЕ СТИЛИ */
+.review-form-simple {
+    background: #1a1a1a;
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid #333;
+    margin: 30px 0;
+}
+
+.review-form-simple h3 {
+    color: #fff;
+    margin-bottom: 15px;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* ИЗМЕНЕНО: убрали grid, теперь поля вертикально */
+.form-row-simple {
+    display: block;
+    margin-bottom: 15px;
+}
+
+.form-group-simple {
+    margin-bottom: 15px;
+}
+
+.form-group-simple label {
+    display: block;
+    color: #fff;
+    margin-bottom: 5px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.form-input-simple {
+    width: 100%;
+    padding: 10px 12px;
+    background: #333;
+    border: 1px solid #555;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 14px;
+    font-family: inherit;
+}
+
+.form-input-simple:focus {
+    outline: none;
+    border-color: #e50914;
+}
+
+/* Выбор рейтинга - ПРОСТЫЕ КНОПКИ */
+.rating-buttons {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+    margin: 10px 0;
+}
+
+.rating-btn {
+    background: #333;
+    border: 1px solid #555;
+    border-radius: 5px;
+    color: #fff;
+    padding: 10px 5px;
+    text-align: center;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s;
+    font-size: 14px;
+}
+
+.rating-btn:hover {
+    background: #444;
+    border-color: #666;
+}
+
+.rating-btn.selected {
+    background: #e50914;
+    border-color: #e50914;
+    transform: scale(1.05);
+}
+
+/* Кнопка отправки */
+.btn-submit-simple {
+    background: #e50914;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 10px;
+    font-weight: 500;
+}
+
+.btn-submit-simple:hover {
+    background: #ff6b6b;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(229, 9, 20, 0.3);
+}
+
+/* Список отзывов - ПРОСТЫЕ СТИЛИ */
+.reviews-simple {
+    margin-top: 40px;
+}
+
+.reviews-header-simple {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #333;
+}
+
+.reviews-header-simple h3 {
+    color: #fff;
+    font-size: 1.3rem;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.reviews-count-simple {
+    background: #e50914;
+    color: white;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.review-item-simple {
+    background: #1a1a1a;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #333;
+    margin-bottom: 15px;
+    transition: transform 0.2s;
+}
+
+.review-item-simple:hover {
+    transform: translateY(-2px);
+    border-color: #444;
+}
+
+.review-header-simple {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.review-author-simple {
+    font-weight: bold;
+    color: #fff;
+    font-size: 16px;
+}
+
+.review-rating-simple {
+    color: #ffd700;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.review-date-simple {
+    color: #666;
+    font-size: 12px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.review-text-simple {
+    color: #ccc;
+    line-height: 1.6;
+    font-size: 14px;
+}
+
+.no-reviews-simple {
+    text-align: center;
+    padding: 40px 20px;
+    color: #666;
+    background: #1a1a1a;
+    border-radius: 10px;
+    border: 1px solid #333;
+}
+
+.no-reviews-simple i {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    opacity: 0.5;
+}
+
+.no-reviews-simple h4 {
+    color: #999;
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+}
+
+.no-reviews-simple p {
+    color: #777;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+/* Адаптивность */
+@media (max-width: 1100px) {
+    .nav-container {
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+
+    .nav-menu {
+        order: 3;
+        width: 100%;
+        justify-content: center;
+        margin-top: 0.5rem;
+        max-width: 100%;
+    }
+
+    .nav-search {
+        order: 2;
+        min-width: 200px;
+        max-width: 300px;
+    }
+
+    .nav-logo {
+        min-width: 140px;
+    }
+}
+
+@media (max-width: 768px) {
+    .nav-menu {
+        gap: 0.5rem;
+        font-size: 0.8rem;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .nav-link, .add-btn {
+        padding: 0.4rem 0.6rem !important;
+        font-size: 0.8rem !important;
+    }
+
+    .nav-search {
+        min-width: 150px;
+        max-width: 200px;
+    }
+
+    .search-form input {
+        font-size: 0.8rem;
+        padding: 0.5rem;
+    }
+
+    .nav-auth {
+        min-width: 120px;
+    }
+
+    .user-name {
+        max-width: 80px;
+    }
+
+    .profile-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 20px;
+    }
+
+    .profile-avatar {
+        margin-right: 0;
+        font-size: 80px;
+    }
+
+    .profile-info h2 {
+        font-size: 1.8rem;
+    }
+
+    .profile-stats {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .stat-card {
+        padding: 20px;
+    }
+
+    .profile-actions {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .btn-back, .btn-add {
+        width: 100%;
+        justify-content: center;
+        padding: 12px;
+    }
+
+    .detail-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .detail-poster {
+        position: static;
+        max-width: 300px;
+        margin: 0 auto;
+    }
+
+    .detail-title {
+        font-size: 2rem;
+    }
+
+    .rating-compact {
+        display: block;
+        width: 100%;
+        text-align: center;
+    }
+
+    .review-form-simple {
+        padding: 15px;
+    }
+
+    .rating-buttons {
+        grid-template-columns: repeat(5, 1fr);
+        gap: 5px;
+    }
+
+    .rating-btn {
+        padding: 8px 3px;
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .nav-logo a {
+        font-size: 1.4rem;
+    }
+
+    .nav-menu {
+        gap: 0.3rem;
+    }
+
+    .nav-link {
+        padding: 0.3rem 0.5rem;
+        font-size: 0.8rem;
+    }
+
+    .detail-title {
+        font-size: 1.7rem;
+    }
+
+    .rating-big {
+        font-size: 24px;
+    }
+
+    .rating-small {
+        font-size: 14px;
+    }
+
+    .review-form-simple h3 {
+        font-size: 16px;
+    }
+
+    .btn-submit-simple {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+
+    .reviews-header-simple h3 {
+        font-size: 1.1rem;
+    }
+
+    .review-item-simple {
+        padding: 15px;
+    }
+}
+/* Кнопка Яндекс OAuth */
+.btn-yandex {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #FFCC00;
+    color: #000;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background 0.3s;
+    margin: 10px auto;
+    max-width: 300px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.btn-yandex:hover {
+    background: #FFD633;
+    color: #000;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.social-login {
+    margin: 25px 0;
+    padding-top: 25px;
+    border-top: 1px solid #eee;
+}

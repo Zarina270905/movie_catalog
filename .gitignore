@@ -24,8 +24,7 @@ ENV/
 # === ДОПОЛНИТЕЛЬНО ДЛЯ DJANGO ===
 # Django media and static
 /media/
-/staticfiles/
-/static/
+
 
 # Logs
 *.log

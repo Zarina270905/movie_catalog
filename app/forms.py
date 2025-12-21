@@ -23,8 +23,8 @@ class ReviewForm(forms.ModelForm):
 
     def clean_rating(self):
         rating = self.cleaned_data.get('rating')
-        if rating and (rating < 1 or rating > 5):
-            raise ValidationError('Рейтинг должен быть от 1 до 5')
+        if rating and (rating < 1 or rating > 10):
+            raise ValidationError('Рейтинг должен быть от 1 до 10')
         return rating
 
 
