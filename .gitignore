@@ -1,6 +1,4 @@
 # .gitignore
-
-# === ВАШИ ТЕКУЩИЕ НАСТРОЙКИ ===
 # Environment variables
 .env
 .env.local
@@ -21,10 +19,8 @@ venv/
 env/
 ENV/
 
-# === ДОПОЛНИТЕЛЬНО ДЛЯ DJANGO ===
 # Django media and static
 /media/
-
 
 # Logs
 *.log
