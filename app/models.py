@@ -16,7 +16,6 @@ class Movie(models.Model):
     def __str__(self):
         return self.title
 
-    # ДОБАВЬ ЭТОТ МЕТОД
     def average_rating(self):
         reviews = self.reviews.filter(is_active=True)
         if reviews.exists():

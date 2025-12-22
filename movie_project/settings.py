@@ -58,10 +58,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'movie_project.urls'
 
-# ============================================
 # НАСТРОЙКИ ШАБЛОНОВ
-# ============================================
-
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -81,10 +78,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'movie_project.wsgi.application'
 
-# ============================================
 # НАСТРОЙКИ БАЗЫ ДАННЫХ
-# ============================================
-
 DB_ENGINE = config('DB_ENGINE', default='django.db.backends.sqlite3')
 
 if DB_ENGINE == 'django.db.backends.sqlite3':
@@ -106,10 +100,7 @@ else:
         }
     }
 
-# ============================================
 # ВАЛИДАЦИЯ ПАРОЛЕЙ
-# ============================================
-
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -125,19 +116,13 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-# ============================================
 # МЕЖДУНАРОДНЫЕ НАСТРОЙКИ
-# ============================================
-
 LANGUAGE_CODE = config('LANGUAGE_CODE', default='ru-ru')
 TIME_ZONE = config('TIME_ZONE', default='Europe/Moscow')
 USE_I18N = True
 USE_TZ = True
 
-# ============================================
 # СТАТИЧЕСКИЕ ФАЙЛЫ
-# ============================================
-
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
 STATIC_ROOT = BASE_DIR / 'staticfiles'
@@ -145,24 +130,15 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
-# ============================================
 # НАСТРОЙКИ ПО УМОЛЧАНИЮ
-# ============================================
-
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# ============================================
 # НАСТРОЙКИ АУТЕНТИФИКАЦИИ
-# ============================================
-
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 LOGIN_URL = '/accounts/login/'
 
-# ============================================
 # EMAIL НАСТРОЙКИ (ДЛЯ ВЕРИФИКАЦИИ)
-# ============================================
-
 EMAIL_BACKEND = config('EMAIL_BACKEND',
                       default='django.core.mail.backends.console.EmailBackend')
 EMAIL_HOST = config('EMAIL_HOST', default='localhost')
@@ -173,25 +149,17 @@ EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', default='')
 DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL',
                            default='noreply@moviecatalog.com')
 
-# ============================================
 # БЕЗОПАСНОСТЬ
-# ============================================
-
 CSRF_TRUSTED_ORIGINS = config('CSRF_TRUSTED_ORIGINS',
                              default='http://localhost:8000,http://127.0.0.1:8000').split(',')
 
-# ============================================
-# КАСТОМНЫЕ НАСТРОЙКИ ПРИЛОЖЕНИЯ
-# ============================================
 
+# КАСТОМНЫЕ НАСТРОЙКИ ПРИЛОЖЕНИЯ
 SITE_NAME = config('SITE_NAME', default='MovieCatalog')
 SITE_DOMAIN = config('SITE_DOMAIN', default='localhost:8000')
 ADMIN_EMAIL = config('ADMIN_EMAIL', default='admin@moviecatalog.com')
 
-# ============================================
 # ЛОГИРОВАНИЕ
-# ============================================
-
 LOG_LEVEL = config('LOG_LEVEL', default='INFO')
 
 LOGGING = {
@@ -219,7 +187,7 @@ LOGGING = {
     },
 }
 
-# =============== Яндекс OAuth настройки ===============
+# Яндекс OAuth настройки
 AUTHENTICATION_BACKENDS = (
     'social_core.backends.yandex.YandexOAuth2',     # Яндекс вход
     'django.contrib.auth.backends.ModelBackend',    # обычный вход
@@ -247,7 +215,6 @@ SOCIAL_AUTH_PIPELINE = (
 SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/'
 SOCIAL_AUTH_LOGIN_ERROR_URL = '/login/'
 SOCIAL_AUTH_URL_NAMESPACE = 'social'
-# =====================================================
 # Дополнительные настройки Яндекс OAuth
 SOCIAL_AUTH_YANDEX_OAUTH2_SCOPE = ['login:info', 'login:email']
 SOCIAL_AUTH_YANDEX_OAUTH2_AUTH_EXTRA_ARGUMENTS = {
@@ -260,4 +227,4 @@ SOCIAL_AUTH_CLEAN_USERNAMES = True
 SOCIAL_AUTH_SLUGIFY_USERNAMES = True
 
 # Разрешить создание пользователей
-SOCIAL_AUTH_CREATE_USERS = True  # ← Разрешить созданиеSOCIAL_AUTH_ASSOCIATE_BY_EMAIL = True  # Только связывать по email
+SOCIAL_AUTH_CREATE_USERS = True
